@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Header1 from "./components/header/Header1";
+import Header2 from "./components/header/Header2";
+import Header3 from "./components/header/Header3";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+import Hero from "./components/hero/Hero";
+import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/scroll/ScrollToTop";
 
 function App() {
+  const [theme, colorMode] = useMode();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="App">
+          <Header1 />
+          <Header2 />
+          <Header3 />
+          <Box bgcolor={theme.palette.bg.main}>
+            <Hero />
+            <Main />
+          </Box>
+          <Footer />
+
+          <ScrollToTop />
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
